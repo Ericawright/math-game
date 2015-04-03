@@ -1,4 +1,4 @@
-
+require 'colorize'
       
 def player_switch
   if @current_player  == @player1
@@ -15,12 +15,11 @@ def get_and_evalute_answer(correct_answer)
   if user_answer == correct_answer
     puts 'good job'
     @current_player[:points] += 1
-    puts "#{@current_player[:name]} has #{@current_player[:points]} points"
+    #puts "#{@current_player[:name]} has #{@current_player[:points]} points and #{@current_player[:lives]}"
   else 
     puts 'wrong'
-    @player1[:lives] -= 1
+    @current_player[:lives] -= 1
   end
-  player_switch
 end
 
 def generate_question
@@ -28,7 +27,7 @@ def generate_question
   b = rand(1..20)
   operation = [:+, :-, :*][rand(0..2)]
 
-  puts "#{@current_player[:name]} What does #{a} #{operation} #{b} =?"
+  puts "#{@current_player[:name]} What is #{a} #{operation} #{b} ?"
   a.send(operation, b)
 end
 
@@ -59,20 +58,22 @@ def init_game
     lives: 3,
     points: 0
   }
+
   @current_player = @player1
   @other_player = @player2
 end
 
 def get_user_input
   puts 'Hello, welcome to the math game, player one, please enter your name'
-  @player1[:name] = gets.chomp
+  @player1[:name] = gets.chomp.red
   puts 'Player two, please enter your name'
-  @player2[:name] = gets.chomp 
+  @player2[:name] = gets.chomp.blue 
 end
 
 def run_game_loop
   while @current_player[:lives] > 0
     ask_question
+    player_switch
   end
   run_game_loop if play_again
 end
