@@ -31,5 +31,3 @@ end
 def restart_game
 
 end
-
-init
