@@ -1,33 +1,103 @@
 
-def init
-puts 'Hello, welcome to the math game, player one, please enter your name'
-player1 = gets.chomp
-puts 'Player two, please enter your name'
-player2 = gets.chomp 
-end  
+# def start
+# puts 'Hello, welcome to the math game, player one, please enter your name'
+# player1 = gets.chomp
+# puts 'Player two, please enter your name'
+# player2 = gets.chomp 
+# end  
 
-def user_names(player1, player2)
-  @player1 = player1
-  @player2 = player2
-end
+# players = {
+#   player1: 3,
+#   player2: 3
+# }
+
+# def user_names
+
+# end
+
+# def generate_question
+
+
+#   # selection = randomize
+#   # if selection == add
+#   #   addition = lambda {|a,b| a + b}
+#   # elsif  selection == sub
+#   #   subtract = lambda {|a,b| a - b}
+#   # elsif selection ==multi
+#   #   multiply = lambda {|a,b| a * b}
+#   # end
+
+
+# end 
+
+# def randomize
+#   # random = rand(1..3)
+#   # case random
+#   # when 1
+#   #   add
+#   # when 2
+#   #   sub
+#   # when 3
+#   #   multi
+#   # end
+      
+
+
+
+player1 = {
+  name: 'player 1',
+  lives: 3
+}
+player2 = {
+  name: 'player 2',
+  lives: 3
+}
 
 def generate_question
-
-end 
-
-def randomize
-
-end   
-
-def prompt_player
-
-end
-
-
-def verify_answer
+  a = rand(1..20)
+  b = rand(1..20)
+  answer = a + b
+  puts "What does #{a} plus #{b} equal?"
+  user_answer = gets.chomp.to_i
+  if user_answer == answer
+    puts 'good job'
+  else 
+    puts 'wrong'
+  end
 
 end
 
-def restart_game
+generate_question
 
-end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
