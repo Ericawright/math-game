@@ -44,30 +44,38 @@
 
 
 
-player1 = {
+@player1 = {
   name: 'player 1',
   lives: 3
 }
-player2 = {
+@player2 = {
   name: 'player 2',
   lives: 3
 }
 
-def generate_question
-  a = rand(1..20)
-  b = rand(1..20)
-  answer = a + b
-  puts "What does #{a} plus #{b} equal?"
-  user_answer = gets.chomp.to_i
-  if user_answer == answer
-    puts 'good job'
-  else 
-    puts 'wrong'
+while @player1[:lives] > 0
+  def generate_question
+    a = rand(1..20)
+    b = rand(1..20)
+    @answer = a + b
+    puts "What does #{a} plus #{b} equal?"
+    user_input
+
   end
 
-end
+  def user_input
+    user_answer = gets.chomp.to_i
+    if user_answer == @answer
+      puts 'good job'
+    else 
+      puts 'wrong'
+      @player1[:lives] -= 1
+    end
+  end
 
-generate_question
+  generate_question
+
+end
 
 
 
