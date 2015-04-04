@@ -20,13 +20,6 @@ class Player
   end
 
 end
-
-#@player1 = Player.new('Erica')
-#@player2 = Player.new('Eliza')
-
-#puts @player2.lives
-
-
       
 def player_switch
   if @current_player  == @player1
@@ -64,8 +57,8 @@ def ask_question
 end
 
 def play_again
-  puts "#{@current_player.name}, you lose! #{@other_player.name}'s score was #{@other_player[:points]}"
-  puts 'do you want to play again? (y/n)'
+  puts "#{@other_player.name}, you lose! #{@current_player.name}'s score was #{@current_player.points}"
+  puts 'Do you want to play again with the same scores? (y/n)'
   play_again = gets.chomp.downcase
   if play_again == 'y'
     @player1.lives = 3
@@ -87,7 +80,7 @@ def get_user_input
 end
 
 def run_game_loop
-  while @current_player.lives > 0
+  while @other_player.lives > 0
     ask_question
     player_switch
   end
@@ -97,14 +90,5 @@ end
 get_user_input
 init_game
 run_game_loop
-
-
-
-
-
-
-
-
-
 
 
