@@ -1,6 +1,9 @@
 
 require 'colorize'
 
+class NotANumberError < StandardError
+end
+
 class Player
   attr_accessor :name, :lives
   attr_reader :points 
@@ -18,7 +21,21 @@ class Player
   def lose_a_life
     @lives -=1
   end
+end
 
+def is_not_a_number?(s)
+  s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil 
+end
+
+def not_a_number_error(correct_answer)
+  raise NotANumberError, "Please enter a number!" 
+  rescue NotANumberError
+  puts 'that was not a number, try again'
+  get_and_evalute_answer(correct_answer)
+end
+
+def user_input
+  gets.chomp
 end
       
 def player_switch
@@ -32,12 +49,13 @@ def player_switch
 end
 
 def get_and_evalute_answer(correct_answer)
-  user_answer = gets.chomp.to_i
-  if user_answer == correct_answer
-    puts 'good job!'
+  user_answer = user_input
+   return not_a_number_error(correct_answer) if is_not_a_number?(user_answer)
+  if user_answer.to_i == correct_answer
+    puts 'good job!'.green
     @current_player.gain_a_point
-  else 
-    puts 'wrong'
+  else
+    puts 'wrong'.yellow
     @current_player.lose_a_life
   end
 end
@@ -74,9 +92,9 @@ end
 
 def get_user_input
   puts 'Hello, welcome to the math game, player one, please enter your name'
-  @player1 = Player.new(gets.chomp.red)
+  @player1 = Player.new(user_input.red)
   puts 'Player two, please enter your name'
-  @player2 = Player.new(gets.chomp.blue) 
+  @player2 = Player.new(user_input.blue) 
 end
 
 def run_game_loop
@@ -86,6 +104,12 @@ def run_game_loop
   end
   run_game_loop if play_again
 end
+
+
+
+
+# puts is_not_a_number?('23 hello')
+# is_not_a_number?('hello')
 
 get_user_input
 init_game
